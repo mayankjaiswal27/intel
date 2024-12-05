@@ -10,25 +10,28 @@ This project connects to a MongoDB database and runs a server on port 5000. Plea
 
 ## Installation
 
-1. Clone the repository and install dependencies:
+1. Clone the repository :
   ```bash
    git clone https://github.com/mayankjaiswal27/intel
    cd intel
    npm install
   ```
-
-2. Create a `.env` file in the root directory and add the following content:
+2. Install dependencies:
+  ```bash
+   npm install
+  ```
+3. Create a `.env` file in the root directory and add the following content:
    ```bash
    MONGO_URI=mongodb+srv://<your-mongodb-uri>
    PORT=5000
    ```
    Replace `<your-mongodb-uri>` with your MongoDB URI.
 
-3. Start the frontend server:
+4. Start the frontend server:
    ```bash
    npm start
    ```
-4. Start the backend server:
+5. Start the backend server:
    ```bash
    node server.js
    ```
