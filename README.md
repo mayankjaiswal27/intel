@@ -16,6 +16,7 @@ This project connects to a MongoDB database and runs a server on port 5000. Plea
    cd intel
   ```
 2. Install dependencies:
+
    ```bash
    npm install
    ```
