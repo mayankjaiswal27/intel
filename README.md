@@ -11,7 +11,7 @@ This project connects to a MongoDB database and runs a server on port 5000. Plea
 ## Installation
 
 1. Clone the repository and install dependencies:
-   ```bash
+  ```bash
    git clone https://github.com/mayankjaiswal27/intel
    cd intel
    npm install
