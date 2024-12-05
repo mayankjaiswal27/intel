@@ -15,10 +15,10 @@ This project connects to a MongoDB database and runs a server on port 5000. Plea
    git clone https://github.com/mayankjaiswal27/intel
    cd intel
   ```
-2. Install dependencies:
+2. Install the dependencies:
    ```bash
-   npm install
-   ```
+  npm install
+  ```
 3. Create a `.env` file in the root directory and add the following content:
    ```bash
    MONGO_URI=mongodb+srv://<your-mongodb-uri>
