@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import ChatWindow from './components/ChatWindow';
+import { createConversation } from './api/chatApi';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [currentChatId, setCurrentChatId] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
+  const handleNewChat = async () => {
+    const newChat = await createConversation(`Chat ${Date.now()}`);
+    setCurrentChatId(newChat._id);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {sidebarVisible && (
+        <Sidebar
+          onSelectChat={setCurrentChatId}
+          onNewChat={handleNewChat}
+          toggleSidebar={() => setSidebarVisible(!sidebarVisible)}
+        />
+      )}
+      <ChatWindow chatId={currentChatId} />
+      {!sidebarVisible && (
+        <button className="toggle-sidebar-btn" onClick={() => setSidebarVisible(true)}>
+          Show Chat History
+        </button>
+      )}
     </div>
   );
-}
+};
 
 export default App;
