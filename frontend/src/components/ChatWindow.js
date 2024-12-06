@@ -50,55 +50,57 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
       </header>
 
       {/* Chat History */}
-      <div className="flex-grow overflow-y-auto p-6">
-  {chat?.history.map((entry, index) => (
-    <div key={index} className="flex flex-col w-full">
-      {/* User's message - Right aligned */}
-      <div className="font-medium p-4 m-4 rounded-lg shadow-md text-gray-100 self-end bg-green-700 text-justify max-w-xl break-words">
-        {entry.prompt}
+      <div className="flex-grow overflow-y-auto px-20">
+        {chat?.history.map((entry, index) => (
+          <div key={index} className="flex flex-col w-full">
+            {/* User's message - Right aligned */}
+            <div className="font-medium p-4 m-4 rounded-lg shadow-md text-gray-100 self-end bg-green-700 text-justify max-w-xl break-words">
+              {entry.prompt}
+            </div>
+            {/* Bot's message - Center aligned */}
+            <div className="font-medium text-sm text-gray-100 p-4 m-4 rounded-lg shadow-md self-start bg-gray-700 text-left">
+              {entry.response}
+            </div>
+          </div>
+        ))}
       </div>
-      
-      {/* Bot's message - Center aligned */}
-      <div className="font-medium  text-sm text-gray-100 p-4 m-4 rounded-lg shadow-md self-start bg-gray-700 text-left">
-        {entry.response}
-        </div>
-      </div>
-    ))}
-  </div>
       {/* Footer */}
       <footer className="p-4 bg-gray-900">
         
       <form onSubmit={handleSubmit} className="flex items-center space-x-2 w-full max-w-xl mx-auto">
-        {/* Prompt Input */}
-        <input
-          type="text"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Type your prompt"
-          className="w-full px-4 py-3 rounded-full bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md max-w-md"
-          required
-        />
-        {/* File Input */}
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="hidden"
-          id="file-upload"
-        />
-        <label
-          htmlFor="file-upload"
-          className="flex items-center justify-center px-4 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 cursor-pointer shadow-md"
-        >
-          📎
-        </label>
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="px-4 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-500 shadow-md flex items-center justify-center"
-        >
-      <FaPaperPlane className="w-5 h-5 mr-2" />
-    </button>
-      </form>
+          {/* Prompt Input */}
+          <input
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Type your prompt"
+            className="w-full px-4 py-3 rounded-full bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md max-w-md"
+            required
+          />
+          {/* File Input */}
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="hidden"
+            id="file-upload"
+          />
+          <label
+            htmlFor="file-upload"
+            className="flex items-center justify-center px-4 py-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 cursor-pointer shadow-md"
+          >
+            📎
+          </label>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className={`px-4 py-3 rounded-full flex items-center justify-center shadow-md ${
+              prompt ? 'bg-green-600 hover:bg-blue-500' : 'bg-green-600 cursor-not-allowed'
+            }`}
+            disabled={!prompt}
+          >
+            <FaPaperPlane className="w-5 h-5 mr-2" />
+          </button>
+        </form>
       </footer>
     </div>
   );
