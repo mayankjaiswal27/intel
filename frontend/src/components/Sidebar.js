@@ -31,7 +31,7 @@ const Sidebar = ({ onSelectChat, onNewChat, toggleSidebar }) => {
 
   const handleToggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
-    toggleSidebar(); 
+    toggleSidebar();
   };
 
   return (
@@ -91,7 +91,7 @@ const Sidebar = ({ onSelectChat, onNewChat, toggleSidebar }) => {
                       }}
                       className="text-red-500 hover:text-red-400 transition text-sm"
                     >
-                      <FaTrashAlt className="w-5 h-5" /> 
+                      <FaTrashAlt className="w-5 h-5" />
                     </button>
                   </li>
                 );
