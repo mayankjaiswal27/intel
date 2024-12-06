@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 import { createConversation } from './api/chatApi';
-import './App.css';
 
 const App = () => {
   const [currentChatId, setCurrentChatId] = useState(null);
@@ -10,24 +9,26 @@ const App = () => {
 
   const handleNewChat = async () => {
     const newChat = await createConversation(`Chat ${Date.now()}`);
-    setCurrentChatId(newChat._id);
+    setCurrentChatId(newChat._id); 
   };
 
   return (
-    <div className="app">
-      {sidebarVisible && (
+    <div className="app flex w-full">
+      {/* Sidebar */}
+      <div
+        className={`transition-all duration-300 ${sidebarVisible ? 'w-72' : 'w-16'}`}
+      >
         <Sidebar
           onSelectChat={setCurrentChatId}
           onNewChat={handleNewChat}
           toggleSidebar={() => setSidebarVisible(!sidebarVisible)}
         />
-      )}
-      <ChatWindow chatId={currentChatId} />
-      {!sidebarVisible && (
-        <button className="toggle-sidebar-btn" onClick={() => setSidebarVisible(true)}>
-          Show Chat History
-        </button>
-      )}
+      </div>
+
+      {/* Chat Window */}
+      <div className={`flex-grow transition-all duration-300 ${sidebarVisible ? 'ml-42' : 'ml-0'}`}>
+        <ChatWindow chatId={currentChatId} isSidebarVisible={sidebarVisible}/>
+      </div>
     </div>
   );
 };
