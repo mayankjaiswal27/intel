@@ -11,8 +11,6 @@ app.use(cors());
 
 
 connectDB();
-
-
 app.use('/api/conversations', conversationsRoutes);
 
 const PORT = process.env.PORT || 5000;

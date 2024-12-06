@@ -57,7 +57,6 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
             <div className="font-medium p-4 m-4 rounded-lg shadow-md text-gray-100 self-end bg-green-700 text-justify max-w-xl break-words">
               {entry.prompt}
             </div>
-
             {/* Bot's message - Center aligned */}
             <div className="font-medium text-sm text-gray-100 p-4 m-4 rounded-lg shadow-md self-start bg-gray-700 text-left">
               {entry.response}
@@ -65,10 +64,10 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
           </div>
         ))}
       </div>
-
       {/* Footer */}
       <footer className="p-4 bg-gray-900">
-        <form onSubmit={handleSubmit} className="flex items-center space-x-2 w-full max-w-xl mx-auto">
+
+      <form onSubmit={handleSubmit} className="flex items-center space-x-2 w-full max-w-xl mx-auto">
           {/* Prompt Input */}
           <input
             type="text"
@@ -95,7 +94,7 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
           <button
             type="submit"
             className={`px-4 py-3 rounded-full flex items-center justify-center shadow-md ${
-              prompt ? 'bg-green-600 hover:bg-blue-500' : 'bg-green-300 cursor-not-allowed'
+              prompt ? 'bg-green-600 hover:bg-blue-500' : 'bg-green-600 cursor-not-allowed'
             }`}
             disabled={!prompt}
           >
