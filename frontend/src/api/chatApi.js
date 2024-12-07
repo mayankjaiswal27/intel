@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api/conversations';
+const BASE_URL = 'http://localhost:4000/api/conversations';
 
 export const fetchConversations = async () => {
   const response = await fetch(BASE_URL);
@@ -28,7 +28,7 @@ export const appendToConversation = async (id, prompt, response) => {
   return responseApi.json();
 };
 export const deleteConversation = async (chatId) => {
-  const response = await fetch(`http://localhost:5000/api/conversations/${chatId}`, {
+  const response = await fetch(`http://localhost:4000/api/conversations/${chatId}`, {
     method: 'DELETE',
   });
 

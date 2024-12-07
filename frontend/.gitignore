@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/models--facebook--dpr-ctx_encoder-multiset-base
+/models--facebook--dpr-question_encoder-multiset-base
 
 # testing
 /coverage

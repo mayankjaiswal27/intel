@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchConversation, appendToConversation } from '../api/chatApi';
+import { fetchConversation } from '../api/chatApi'; // Assuming you have an API to fetch chat history
 import { FaPaperPlane } from 'react-icons/fa';
 
 const ChatWindow = ({ chatId, isSidebarVisible }) => {
@@ -24,16 +24,41 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('prompt', prompt);
     if (file) {
       formData.append('file', file);
     }
-    const dummyResponse = 'This is a dummy response';
-    const updatedChat = await appendToConversation(chatId, prompt, dummyResponse, formData);
-    setPrompt('');
-    setFile(null);
-    setChat(updatedChat);
+
+    try {
+      // Send the user input to Flask backend
+      const response = await fetch('http://127.0.0.1:5000/process', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch response from the server');
+      }
+
+      const data = await response.json();
+
+      // Update the chat with the received response
+      const updatedChat = {
+        ...chat,
+        history: [
+          ...(chat?.history || []),
+          { prompt, response: data.answer },
+        ],
+      };
+
+      setChat(updatedChat);
+      setPrompt('');
+      setFile(null);
+    } catch (error) {
+      console.error('Error fetching the response:', error);
+    }
   };
 
   const firstPrompt = chat?.history && chat.history[0] ? chat.history[0].prompt : 'Untitled Chat';
@@ -64,10 +89,10 @@ const ChatWindow = ({ chatId, isSidebarVisible }) => {
           </div>
         ))}
       </div>
+
       {/* Footer */}
       <footer className="p-4 bg-gray-900">
-
-      <form onSubmit={handleSubmit} className="flex items-center space-x-2 w-full max-w-xl mx-auto">
+        <form onSubmit={handleSubmit} className="flex items-center space-x-2 w-full max-w-xl mx-auto">
           {/* Prompt Input */}
           <input
             type="text"
