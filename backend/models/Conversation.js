@@ -5,7 +5,7 @@ const conversationSchema = new mongoose.Schema({
   history: [
     {
       prompt: String,
-      response: String,
+      response: mongoose.Schema.Types.Mixed, // Changed to allow any type of object
     },
   ],
 });
